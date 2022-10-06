@@ -2,7 +2,7 @@ let card_number = document.querySelector("#card_number_display")
 let input = document.querySelector("#number")
 const numRegex = /^[0-9]+$/
 
-input.addEventListener("keyup", (e) => {
+input.addEventListener("input", (e) => {
 
     if (input.value.length > 0) {
         let val = input.value
