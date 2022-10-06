@@ -14,8 +14,8 @@ input {
   border: 1px solid hsl(270, 3%, 87%);
   height: 2.2em;
   margin: 0.5em 0;
-  padding: 5px 0.65em 0px 0.65em;
- 
+  padding-top: 5px 0.65em 0px 0.65em;
+  padding-left: 0.65em;
   font-size: 18px;
   transition: border 500ms;
 }
@@ -201,8 +201,9 @@ button {
   .container {
     display: grid;
     grid-template-columns: 35% 65%;
-    width: 100vw;
+    
     height: 100vh;
+    
   }
   .card__bg__thumb {
     width: 100%;
@@ -308,6 +309,7 @@ button {
     width: 100%;
     height: 100%;
     max-height: 100%;
+    max-width: 500px;
   }
 }
 @media screen and (min-width: 1200px) {
@@ -324,6 +326,12 @@ button {
   .circles img {
     max-width: 80px;
   }
+  .card__bg__thumb img {
+    width: 100%;
+    height: 100%;
+    
+    max-height: 100%;
+  }
   .circles {
     margin: 2em 1em 3.5em 1.5em;
   }
@@ -339,4 +347,5 @@ button {
   .card-cvc {
     font-size: 14px;
   }
+  
 }
