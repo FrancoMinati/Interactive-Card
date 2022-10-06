@@ -31,7 +31,10 @@ input::placeholder {
   color: hsl(279, 6%, 55%);
   opacity: 0.5;
 }
-
+input:invalid {
+  outline: none;
+  border: 1px solid hsl(0, 100%, 66%);
+}
 button {
   border-radius: 10px;
   border: none;
@@ -42,33 +45,12 @@ button {
   margin-top: 1em;
   height: 2.9em;
 }
-.form__label {
-  text-transform: uppercase;
-  color: hsl(278, 68%, 11%);
-  font-size: 12px;
-  letter-spacing: 2px;
-  font-weight: bold;
-  margin: 0.5em 0;
-}
-
+/*----------------Containers--------------*/
 .container {
   overflow: hidden;
   position: relative;
   display: grid;
   width: 100%;
-}
-.card__bg__thumb img {
-  width: 100%;
-  height: 100%;
-  max-height: 325px;
-}
-.card__bg__thumb {
-  position: relative;
-}
-.card__bg__center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .card-container {
   position: absolute;
@@ -80,6 +62,29 @@ button {
   display: flex;
   justify-content: center;
 }
+.form-container {
+  overflow: hidden;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+/*------------Card placement-------------*/
+.card__bg__thumb {
+  position: relative;
+}
+.card__bg__center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card__bg__thumb img {
+  width: 100%;
+  height: 100%;
+  max-height: 325px;
+}
+
 .card-f {
   position: absolute;
   top: 0;
@@ -123,28 +128,17 @@ button {
 .img-card {
   width: 290px;
 }
-.circles {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-left: 1em;
-}
-.circle {
-  width: 32px;
-  height: 32px;
-  margin: 1.3em 0.7em 1.3em 0em;
-  border-radius: 50%;
 
-  background-color: white;
+/*Card content*/
+.circles img {
+  width: min-content;
+  height: min-content;
+  max-width: 50px;
 }
-.circle-nobg {
-  width: 11px;
-  height: 11px;
-  margin: 1.3em 1.3em 1.3em 0;
-  border-radius: 50%;
-  border: 1.6px solid white;
-  background-color: transparent;
+.circles {
+  margin: 1em 1em 2em 1em;
 }
+
 .card-number {
   display: block;
   font-size: 18px;
@@ -173,13 +167,11 @@ button {
   font-size: 10px;
   letter-spacing: 1px;
   font-weight: normal;
-
   margin-left: 10px;
   margin-bottom: 5px;
-
   text-align: end;
 }
-
+/*-----------------formulary-----------------*/
 .formulary {
   overflow: hidden;
   display: flex;
@@ -187,13 +179,14 @@ button {
   max-width: 375px;
   margin: 80px 1em;
 }
-.form-container {
-  overflow: hidden;
-  width: 100%;
 
-  display: flex;
-  justify-content: center;
-  align-content: center;
+.form__label {
+  text-transform: uppercase;
+  color: hsl(278, 68%, 11%);
+  font-size: 12px;
+  letter-spacing: 2px;
+  font-weight: bold;
+  margin: 0.5em 0;
 }
 .exp-date-cvc {
   width: 100%;
@@ -214,12 +207,12 @@ button {
     width: 100%;
     height: 100%;
   }
- 
+
   .card-f {
     position: absolute;
     top: 20%;
     left: 20%;
-    margin: 0px ;
+    margin: 0px;
     z-index: 1;
     display: grid;
     width: 350px;
@@ -259,41 +252,25 @@ button {
   .card__content-b {
     grid-area: 1/2;
   }
+  .circles img {
+    max-width: 60px;
+  }
   .circles {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-left: 1em;
-    padding-bottom: 2em;
+    margin: 1.5em 1em 3em 1em;
   }
-  .circle {
-    width: 50px;
-    height: 50px;
-    margin: 2em 0.7em 1.3em .5em;
-    border-radius: 50%;
-  
-    background-color: white;
-  }
-  .circle-nobg {
-    width: 15px;
-    height: 15px;
-    margin: 2em 1.3em 1.3em 0;
-    border-radius: 50%;
-    border: 1.6px solid white;
-    background-color: transparent;
-  }
+
   .card-number {
     display: block;
-    font-size: 20px;
-    text-align: center;
+    font-size: 21px;
+    text-align: start;
+    padding-left: .8em;
     letter-spacing: 2.5px;
-  
     width: 100%;
   }
   .information {
     display: flex;
     justify-content: space-between;
-    margin: 1em 1.6em;
+    margin: 1em 1em;
   }
   .card-name,
   .card-exp-date,
@@ -310,10 +287,10 @@ button {
     font-size: 10px;
     letter-spacing: 1px;
     font-weight: normal;
-  
+
     margin-right: 10px;
     margin-bottom: 5px;
-  
+
     text-align: end;
   }
   .form-container {
@@ -331,10 +308,8 @@ button {
     height: 100%;
     max-height: 100%;
   }
-  
 }
 @media screen and (min-width: 1200px) {
-
   .card-f {
     top: 20%;
     left: 30%;
@@ -345,19 +320,13 @@ button {
     left: 60%;
     width: 450px;
   }
+  .circles img {
+    max-width: 80px;
+  }
   .circles {
-    padding-bottom: 2em;
+    margin: 2em 1em 3em 1.5em;
   }
-  .circle {
-    width: 50px;
-    height: 50px;
-    margin: 2em 0.7em 1.3em .5em;
-  }
-  .circle-nobg {
-    width: 15px;
-    height: 15px;
-    margin: 2em 1.3em 1.3em 0;
-  }
+
   .card-number {
     font-size: 30px;
   }
@@ -368,5 +337,5 @@ button {
   .card-exp-date,
   .card-cvc {
     font-size: 14px;
-  }  
+  }
 }
