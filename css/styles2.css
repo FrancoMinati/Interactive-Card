@@ -14,9 +14,10 @@ input {
   border: 1px solid hsl(270, 3%, 87%);
   height: 2.2em;
   margin: 0.5em 0;
-  padding-top: 5px;
-  padding-left: 0.65em;
+  padding: 5px 0.65em 0px 0.65em;
+ 
   font-size: 18px;
+  transition: border 500ms;
 }
 input:focus {
   outline: none;
@@ -136,7 +137,7 @@ button {
   max-width: 50px;
 }
 .circles {
-  margin: 1em 1em 2em 1em;
+  margin: 1em 1em 3em 1em;
 }
 
 .card-number {
@@ -324,7 +325,7 @@ button {
     max-width: 80px;
   }
   .circles {
-    margin: 2em 1em 3em 1.5em;
+    margin: 2em 1em 3.5em 1.5em;
   }
 
   .card-number {
