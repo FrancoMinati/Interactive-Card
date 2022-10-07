@@ -50,6 +50,7 @@ button {
 .errorMSG {
   display: none;
   color: red;
+  font-size: 12px;
   width: 180px;
 }
 .invalid{
