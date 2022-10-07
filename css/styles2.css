@@ -254,7 +254,7 @@ button {
   .card__content-b {
     grid-area: 1/2;
   }
-  .circles img {
+  .card__bg__thumb .circles img {
     max-width: 60px;
   }
   .circles {
