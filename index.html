@@ -38,7 +38,7 @@
                 <img src="images/bg-card-back.png" alt="" class="img-card">
               </div>
               <div class="card__content-b">
-                <label class="card-cvc">000</label>
+                <label class="card-cvc" id="card_cvc_display">000</label>
               </div>
             </div>
             <div class="card-f">
@@ -52,7 +52,7 @@
                 <label class="card-number" id="card_number_display">0000&nbsp;0000&nbsp;0000&nbsp;0000</label>
                 <div class="information">
                   <label class="card-name" id="card_name_display">Jane Appleseed</label>
-                  <label class="card-exp-date">00/00</label>
+                  <label class="card-exp-date" id="card_date_display">00/00</label>
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@
       </div>
     </div>
     <div class="form-container">
-      <form action="" class="formulary">
+      <form action="" class="formulary" id="form">
         <div class="form__section">
           <label class="form__label " for="name">cardholder name</label>
           <input type="text" id="name" placeholder="e.g. Jane Appleseed" required>
@@ -69,32 +69,37 @@
         </div>
         <div class="form__section">
           <label class="form__label " for="card_number">card number</label>
-          <input type="text" id="number" placeholder="e.g. 1234 5678 9123 0000" required>
+          <input type="text" id="number" placeholder="e.g. 1234 5678 9123 0000" required autocomplete="off">
           <div class="errorMSG" id="InputNumberError">Only numbers allowed!</div>
         </div>
 
         <div class="exp-date-cvc">
           <div class="month">
             <label class="form__label ">exp.date</label>
-            <input type="number" id="month" placeholder="MM" required>
-            <div class="errorMSG" id="inputMonthError" maxlength="2">Cant be blank</div>
+            <input type="text" id="month" placeholder="MM" required maxlength="2">
+            <div class="errorMSG" id="InputMonthError" >Cant be blank</div>
           </div>
           <div class="year">
             <label class="form__label ">mm/yy</label>
-            <input type="number" id="year" placeholder="YY" required>
-            <div class="errorMSG" id="InputYearError" maxlength="2">Cant be blank</div>
+            <input type="text" id="year" placeholder="YY" required maxlength="2"> 
+            <div class="errorMSG" id="InputYearError" >Cant be blank</div>
           </div>
           <div class="cvc">
             <label class="form__label " for="cvc">cvc</label>
-            <input type="number" id="cvc" placeholder=" e.g. 123" required>
-            <div class="errorMSG"  id="InputCvCError" maxlength="3">Cant be blank</div>
+            <input type="text" visible id="cvc" placeholder=" e.g. 123" required maxlength="3"  autocomplete="off">
+            <div class="errorMSG"  id="InputCvCError" >Cant be blank</div>
           </div>
         </div>
 
-        <button type="submit">Confirm</button>
+        <button type="submit" class="btn_submit">Confirm</button>
       </form>
-    </div>
-
+      <div class="form-completed" id="end-state">
+        <img src="images/icon-complete.svg" alt="complete-icon">
+      <h1>Thank you!</h1>
+      <p>We've added your card details</p>
+      <button id="refresh" class="btn_continue">Continue</button>
+      </div>
+    </div>   
   </div>
 
 

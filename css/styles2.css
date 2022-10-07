@@ -8,6 +8,12 @@ body {
 body {
   font-family: "Space Grotesk", cursive;
 }
+p{
+  color: hsl(279, 6%, 55%);
+}
+h1{
+  margin-bottom: 0;
+}
 input {
   font-family: "Space Grotesk", cursive;
   border-radius: 10px;
@@ -44,8 +50,11 @@ button {
   color: hsl(0, 0%, 100%);
   font-family: "Space Grotesk", cursive;
   font-size: 18px;
-  
+  width: 100%;
   height: 2.9em;
+}
+.btn_continue{
+  margin-top: 1em;
 }
 .errorMSG {
   display: none;
@@ -54,6 +63,9 @@ button {
   width: 180px;
 }
 .invalid{
+  border: 1px solid red;
+}
+.invalid:focus{
   border: 1px solid red;
 }
 
@@ -89,6 +101,7 @@ button {
   justify-content: center;
   align-content: center;
 }
+
 /*------------Card placement-------------*/
 .card__bg__thumb {
   position: relative;
@@ -198,7 +211,14 @@ button {
   max-width: 375px;
   margin: 80px 1em;
 }
-
+.form-completed{
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 375px;
+  margin: 100px 1.5em;
+}
 .form__label {
   text-transform: uppercase;
   color: hsl(278, 68%, 11%);
