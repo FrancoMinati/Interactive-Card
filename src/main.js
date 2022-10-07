@@ -1,27 +1,34 @@
 let card_number = document.querySelector("#card_number_display")
-let input = document.querySelector("#number")
+let number_input = document.querySelector("#number")
 const numRegex = /^[0-9]+$/
 
-input.addEventListener("input", (e) => {
-
-    if (input.value.length > 0) {
-        let val = input.value
+number_input.addEventListener("input", (e) => {
+    if (number_input.value.length > 0) {
+        let val = number_input.value
         let card = card_number.textContent
-        
-        if (checkDigit(e)) {
 
-            val = cc_format(input.value)
-            input.value = val
-            card_number.innerHTML = `${val.concat(card.substring(val.length))}`
-        }
-        if (e.which == 8) {
-            let base_card="0000&nbsp;0000&nbsp;0000&nbsp;0000"
-            card_number.innerHTML = `${cc_format(input.value).concat(base_card.substring(val.length))}`
-            
-        }
-    }
-    if (input.value.length === 0) {
+
         
+        if (e.data != null) {
+            if (checkDigit(e)) {
+                val = cc_format(number_input.value)
+                number_input.value = val
+                card_number.innerHTML = `${val.concat(card.substring(val.length))}`
+            } else {
+                number_input.value = number_input.value.substring(0,number_input.value.length - 1)
+            }
+        }else{
+        if (e.which == 0) {
+            let base_card = "0000 0000 0000 0000"
+            val = cc_format(number_input.value)
+            number_input.value = val
+            card_number.innerHTML = `${val.concat(base_card.substring(val.length))}`
+            
+        } }
+    }
+
+    if (number_input.value.length === 0) {
+
         card_number.innerHTML = `0000&nbsp;0000&nbsp;0000&nbsp;0000`
     }
 })
@@ -43,16 +50,15 @@ function cc_format(value) {
     }
 }
 function checkDigit(event) {
-    var code = (event.which) ? event.which : event.keyCode;
 
-    if ((code < 48 || code > 57) && (code > 31)) {
+    if (isNumber(event.data)) {
+        return true;
+    } else {
         return false;
     }
 
-    return true;
 }
-document.querySelectorAll('*').forEach(el => {
-    if (el.offsetWidth > document.documentElement.offsetWidth) {
-        console.log('Found the worst element ever: ', el);
-    }
-  });
+
+function isNumber(str) {
+    return !(str.length === 1 && str.match(/[a-z]/i));
+}
