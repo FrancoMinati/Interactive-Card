@@ -11,14 +11,14 @@ let card_date = document.querySelector("#card_date_display")
 let cvc_input = document.querySelector("#cvc")
 let card_cvc = document.querySelector("#card_cvc_display")
 
-let form=document.querySelector("#form")
-const numRegex = /^[0-9]+$/
-form.addEventListener("submit",(e)=>{
-e.preventDefault()
-if(validateMonth(month_input.value)&&validateCvC(cvc_input.value)){
-    document.querySelector("#end-state").style.display="flex"
-    form.style.display="none"
-} 
+let form = document.querySelector("#form")
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault()
+    if (validateForm()) {
+        document.querySelector("#end-state").style.display = "flex"
+        form.style.display = "none"
+    }
 
 })
 name_input.addEventListener("input", (e) => {
@@ -26,11 +26,12 @@ name_input.addEventListener("input", (e) => {
 
     if (name.length > 0) {
         (e.data != null) ?
-            ((checkLetter(e)) ? (card_name.innerHTML = `${name}`, setValid("name", "InputNameError")) :
-                (name_input.value = name_input.value.substring(0, name_input.value.length - 1), setInvalid("name", "InputNameError"),setTimeout(() => { setValid("name", "InputNameError")}, 1500)))
+            ((checkLetter(e)) &&
+                (card_name.innerHTML = `${name}`),setValid("name","InputNameError"))
             :
             (e.which == 0) && (card_name.innerHTML = `${name}`)
 
+            !hasNumber(name_input.value)&&setValid("name","InputNameError")
     } else {
         card_name.innerText = "Jane appleseed"
     }
@@ -57,7 +58,7 @@ number_input.addEventListener("input", (e) => {
             } else {
                 number_input.value = number_input.value.substring(0, number_input.value.length - 1)
                 setInvalid("number", "InputNumberError")
-                setTimeout(() => { setValid("number", "InputNumberError")}, 1500)
+                setTimeout(() => { setValid("number", "InputNumberError") }, 1500)
             }
         } else {
             if (e.which == 0) {
@@ -69,9 +70,9 @@ number_input.addEventListener("input", (e) => {
             }
         }
     }
-   
-        
-    
+
+
+
 
     if (number_input.value.length === 0) {
 
@@ -103,13 +104,14 @@ month_input.addEventListener("input", (e) => {
 
     if (month.length > 0) {
         (e.data != null) ?
-            ((checkDigit(e)) ? (card_date.innerHTML = `${formatDate(month)+ "/00"}`, setValid("month", "InputMonthError")) :
-                (month_input.value = month.value.substring(0, month_input.value.length - 1), setInvalid("month", "InputMonthError"), document.querySelector("#InputMonthError").innerText = `Letters not allowed`))
+            ((checkDigit(e)) ? (previousTxt = card_date.textContent.substring(3, 5), card_date.innerHTML = `${formatDate(month)+ "/" + previousTxt }`, setValid("month", "InputMonthError")) :
+                (month_input.value = month_input.value.substring(0, month_input.value.length - 1), setInvalid("month", "InputMonthError"), document.querySelector("#InputMonthError").innerText = `Letters not allowed`))
             :
-            (e.which == 0) && (card_date.innerHTML = `${formatDate(month)+"/00"}`)
+            (e.which == 0) && (previousTxt = card_date.textContent.substring(3, 5), card_date.innerHTML = `${formatDate(month) + "/" +previousTxt }`)
 
     } else {
-        card_date.innerText = "00/00"
+        previousTxt = card_date.textContent.substring(3, 5)
+        card_date.innerHTML = `${"00/"+ previousTxt}`
     }
 })
 year_input.addEventListener("input", (e) => {
@@ -117,14 +119,14 @@ year_input.addEventListener("input", (e) => {
 
     if (year.length > 0) {
         (e.data != null) ?
-            ((checkDigit(e)) ? (previousTxt=card_date.textContent.substring(0,2),card_date.innerHTML = `${previousTxt+"/"+formatDate(year)}`, setValid("year", "InputYearError")) :
-                (year_input.value = year.value.substring(0, year_input.value.length - 1), setInvalid("year", "InputYearError"), document.querySelector("#InputYearError").innerText = `Letters not allowed`))
+            ((checkDigit(e)) ? (previousTxt = card_date.textContent.substring(0, 2), card_date.innerHTML = `${previousTxt + "/" + formatDate(year)}`, setValid("year", "InputYearError")) :
+                (year_input.value = year_input.value.substring(0, year_input.value.length - 1), setInvalid("year", "InputYearError"), document.querySelector("#InputYearError").innerText = `Letters not allowed`))
             :
-            (e.which == 0) && (previousTxt=card_date.textContent.substring(0,2),card_date.innerHTML = `${previousTxt+"/"+formatDate(year)}`)
+            (e.which == 0) && (previousTxt = card_date.textContent.substring(0, 2), card_date.innerHTML = `${previousTxt + "/" + formatDate(year)}`)
 
     } else {
-        previousTxt=card_date.textContent.substring(0,2)
-        card_date.innerHTML = `${previousTxt+"/00"}`
+        previousTxt = card_date.textContent.substring(0, 2)
+        card_date.innerHTML = `${previousTxt + "/00"}`
     }
 })
 function cc_format(value) {
@@ -150,22 +152,36 @@ function checkDigit(event) {
         return false;
     }
 }
+
+
+function validateForm() {
+    let a = validateCvC(cvc_input.value)
+    let b = validateMonth(month_input.value)
+    let c = hasNumber(name_input.value)
+    
+    c && (document.querySelector("#InputNameError").innerHTML = "Invalid Name", setInvalid("name", "InputNameError") )
+    return (a && b && !c)
+
+}
+function hasNumber(myString) {
+    return /\d/.test(myString);
+}
 function validateMonth(value) {
-     !(value > 0 && value <= 12) && (document.querySelector("#InputMonthError").innerHTML="Invalid Month", setInvalid("month","InputMonthError"))
-     return (value > 0 && value <= 12)
+    !(value > 0 && value <= 12) && (document.querySelector("#InputMonthError").innerHTML = "Invalid Month", setInvalid("month", "InputMonthError"))
+    return (value > 0 && value <= 12)
 }
-function validateCvC(value){
-     !(value.length===3) && (document.querySelector("#InputCvCError").innerHTML="Incomplete CVC", setInvalid("cvc","InputCvCError"))
-     return (value.length===3)
+function validateCvC(value) {
+    !(value.length === 3) && (document.querySelector("#InputCvCError").innerHTML = "Incomplete CVC", setInvalid("cvc", "InputCvCError"))
+    return (value.length === 3)
 }
+
 function formatDate(value) {
     return value < 10 ? (val = "0" + value) : val = value
 }
 
 
-
 function checkLetter(event) {
-    
+
     if (isLetter(event.data)) {
         return true;
     } else {
@@ -191,6 +207,6 @@ function setValid(InputID, ErrorID) {
     input.classList.remove("invalid")
     error.style.display = "none"
 }
-document.querySelector("#refresh").addEventListener("click",()=>{
+document.querySelector("#refresh").addEventListener("click", () => {
     window.location.reload()
 })
