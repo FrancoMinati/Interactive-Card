@@ -208,39 +208,3 @@ document.querySelector("#refresh").addEventListener("click", () => {
     window.location.reload()
 })
 
-number_input.addEventListener("touchend", (e) => {
-    if (number_input.value.length > 0) {
-        let val = number_input.value
-        let card = card_number.textContent
-
-        if (e.data != null) {
-            if (checkDigit(e)) {
-                val = cc_format(number_input.value)
-                number_input.value = val
-                card_number.innerHTML = `${val.concat(card.substring(val.length))}`
-                setValid("number", "InputNumberError")
-
-            } else {
-                number_input.value = number_input.value.substring(0, number_input.value.length - 1)
-                setInvalid("number", "InputNumberError")
-                setTimeout(() => { setValid("number", "InputNumberError") }, 2000)
-            }
-        } else {
-            if (e.which == 0) {
-                let base_card = "0000 0000 0000 0000"
-                val = cc_format(number_input.value)
-                number_input.value = val
-                card_number.innerHTML = `${val.concat(base_card.substring(val.length))}`
-
-            }
-        }
-    }
-
-    if (number_input.value.length === 0) {
-
-        card_number.innerHTML = `0000 0000 0000 0000`
-    }
-    if (number_input.value.length == 19) {
-        setValid("number", "InputNumberError")
-    }
-})
